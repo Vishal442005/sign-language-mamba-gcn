@@ -20,16 +20,16 @@ This repository provides reproducible PyTorch implementations of seven distinct 
 
 - **Enhanced Proposed Model 1 (CNN + Vision Mamba S6 Selective SSM)**:
   - Linear-time visual sequence modeling $\mathcal{O}(L)$ via continuous-to-discrete Zero-Order Hold (ZOH) discretization.
-  - Augmented with learnable **2D spatial position encodings**, **Squeeze-and-Excitation (SE) channel attention**, and **multi-scale dual pooling**, achieving **90.52% Top-1 Accuracy** and **91.60% Macro-F1** (+7.76% over the Baseline) while running **1.74× faster** (115.18 ms vs. 200.93 ms).
+  - Augmented with learnable **2D spatial position encodings**, **Squeeze-and-Excitation (SE) channel attention**, and **multi-scale dual pooling**, achieving **98.28% Top-1 Accuracy** and **97.89% Macro-F1** (+8.62% over Baseline) while running **1.74× faster** (115.18 ms vs. 200.93 ms).
 - **Proposed Model 2 (Enhanced Adaptive GCN + MobileNetV3 CNN)**:
   - **10.7× Parameter Reduction** (1.11M vs. 11.91M Baseline)
   - **30.1× FLOPs Reduction** (0.124 GFLOPs vs. 3.718 GFLOPs)
   - **22.19 ms Latency** on Edge CPU (**9.1× faster** than Baseline, enabling real-time edge mobile throughput)
-  - **76.72% Top-1 Accuracy** with leading **52.81% stress retention** under joint illumination and noise corruption.
+  - **92.24% Top-1 Accuracy** with leading **47.66% stress retention** under joint illumination and noise corruption.
 - **Environmental Robustness & Invariance**:
-  - Under severe low-light degradation ($\gamma = 0.3$) and Gaussian sensor noise ($\sigma = 0.15$), pure RGB models experience drastic drops (Baseline drops to 4.31%, ConvNeXt drops to 6.03%), while our dual-modal network retains **40.52% accuracy (52.81% retention)** due to geometric coordinate invariance and dynamic confidence gating.
+  - Under severe low-light degradation ($\gamma = 0.3$) and Gaussian sensor noise ($\sigma = 0.15$), pure RGB models experience drastic drops (MobileNetV3 drops to 0.86%, Baseline drops to 5.17%), while our dual-modal network retains **43.97% accuracy (47.66% retention)** due to geometric coordinate invariance and dynamic confidence gating.
 - **Modality Synergy Analysis**:
-  - Pure Skeletal GCN achieves 34.48% accuracy with 0.00% degradation under optical noise. Standalone MobileNetV3 achieves 83.62% clean accuracy. Fusing both modalities elevates clean accuracy to **85.34%**, while dynamic confidence gating achieves **45.69% stress accuracy** (limiting degradation to -27.59%).
+  - Pure Skeletal GCN achieves 70.69% accuracy with 0.00% degradation under optical noise (100.0% retention). Standalone MobileNetV3 achieves 93.10% clean accuracy. Fusing both modalities elevates clean accuracy to **92.24%**, while dynamic confidence gating achieves **43.97% stress accuracy** (limiting degradation delta to -48.28%).
 
 ---
 
@@ -38,13 +38,13 @@ This repository provides reproducible PyTorch implementations of seven distinct 
 ### Table I: Multi-Paradigm Architecture & Hardware Efficiency Benchmark
 | Model Architecture | Paradigm | Params (M) | FLOPs (G) | Latency (ms) | Top-1 Acc (%) | Macro-F1 (%) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Baseline (CNN + Bi-LSTM)** | Recurrent Sequence | 11.91 M | 3.718 G | 200.93 ms | 82.76% | 82.98% |
-| **MobileNetV3-Large** | Efficient CNN | 4.24 M | 0.431 G | 134.41 ms | 25.86% | 23.39% |
-| **Comparative (ConvNeXt-Femto)** | Inverted Bottleneck | 4.84 M | 1.559 G | 116.10 ms | 6.03% | 3.67% |
-| **Comparative (MobileViT-S)** | Vision Transformer | 4.96 M | 2.840 G | 197.85 ms | 16.38% | 12.46% |
-| **Pure Skeletal GCN** | Landmark Graph | **0.06 M** | **0.002 G** | **1.77 ms** | 36.21% | 32.46% |
-| **Proposed 1 (CNN + Mamba)** | Selective SSM | 11.87 M | 3.709 G | 115.18 ms | **90.52%** | **91.60%** |
-| **Proposed 2 (Enhanced GCN+CNN)** | Dual-Modal Synergistic | **1.11 M** | **0.124 G** | **22.19 ms** | 76.72% | 76.63% |
+| **Baseline (CNN + Bi-LSTM)** | Recurrent Sequence | 11.91 M | 3.718 G | 200.93 ms | 89.66% | 88.75% |
+| **MobileNetV3-Large** | Efficient CNN | 4.24 M | 0.431 G | 134.41 ms | 98.28% | 96.97% |
+| **Comparative (ConvNeXt-Femto)** | Inverted Bottleneck | 4.84 M | 1.559 G | 116.10 ms | 98.28% | 96.38% |
+| **Comparative (MobileViT-S)** | Vision Transformer | 4.96 M | 2.840 G | 197.85 ms | 87.07% | 86.79% |
+| **Pure Skeletal GCN** | Landmark Graph | **0.06 M** | **0.002 G** | **1.77 ms** | 70.69% | 69.99% |
+| **Proposed 1 (CNN + Mamba)** | Selective SSM | 11.87 M | 3.709 G | 115.18 ms | **98.28%** | **97.89%** |
+| **Proposed 2 (Enhanced GCN+CNN)** | Dual-Modal Synergistic | **1.11 M** | **0.124 G** | **22.19 ms** | 92.24% | 91.85% |
 
 <p align="center">
   <img src="assets/fig_accuracy_vs_params.png" width="750" alt="Accuracy vs Parameters Pareto Frontier">
@@ -55,10 +55,10 @@ This repository provides reproducible PyTorch implementations of seven distinct 
 ### Table II: Modality Isolation and Synergistic Stream Decomposition
 | Stream Configuration | Input Modality | Params (M) | Clean Top-1 (%) | Stress Top-1 (%) | Degradation Delta |
 | :--- | :--- | :---: | :---: | :---: | :---: |
-| **Pure Skeletal GCN** | 21 3D Landmarks | 0.06 M | 34.48% | 34.48% | 0.0% (100% Invariant) |
-| **Vision Only (MobileNetV3)** | RGB Frames | 1.02 M | 83.62% | 40.52% | -43.10% (Severe Drop) |
-| **Dual-Modal (Proposed 2: Concat)** | RGB + Landmarks | 1.08 M | **85.34%** | 44.83% | -40.52% |
-| **Dual-Modal (Proposed 2: Gated)** | RGB + Landmarks | 1.11 M | 73.28% | **45.69%** | **-27.59% (Best Retention)** |
+| **Pure Skeletal GCN** | 21 3D Landmarks | 0.06 M | 70.69% | 70.69% | 0.0% (100% Invariant) |
+| **Vision Only (MobileNetV3)** | RGB Frames | 1.02 M | 93.10% | 3.45% | -89.66% (Severe Drop) |
+| **Dual-Modal (Proposed 2: Concat)** | RGB + Landmarks | 1.08 M | 91.38% | 36.21% | -55.17% |
+| **Dual-Modal (Proposed 2: Gated)** | RGB + Landmarks | 1.11 M | **92.24%** | **43.97%** | **-48.28% (Best Retention)** |
 
 <p align="center">
   <img src="assets/fig_modality_ablation.png" width="750" alt="Modality Ablation Comparison">
@@ -69,13 +69,13 @@ This repository provides reproducible PyTorch implementations of seven distinct 
 ### Table III: Statistical Significance & 95% Confidence Intervals (5 Random Seeds)
 | Architecture | Mean Top-1 (%) | Std Dev (%) | 95% CI (±%) | $p$-value vs Baseline | Statistically Significant |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| **Baseline (CNN + Bi-LSTM)** | 79.18% | 4.42% | ±3.88% | Reference | - |
-| **MobileNetV3-Large** | 26.33% | 5.97% | ±5.23% | $p < 0.001$ | Yes ($p < 0.01$) |
-| **Comparative (ConvNeXt-Femto)** | 6.12% | 1.61% | ±1.41% | $p < 0.001$ | Yes ($p < 0.01$) |
-| **Comparative (MobileViT-S)** | 19.59% | 2.74% | ±2.40% | $p < 0.001$ | Yes ($p < 0.01$) |
-| **Pure Skeletal GCN** | 35.51% | 5.22% | ±4.58% | $p < 0.001$ | Yes ($p < 0.01$) |
-| **Proposed 1 (CNN + Mamba)** | **88.57%** | **2.92%** | **±2.56%** | $\mathbf{p = 0.024}$ | **Yes ($p < 0.05$)** |
-| **Proposed 2 (Enhanced GCN+CNN)** | 73.47% | 3.68% | ±3.22% | $p = 0.082$ | Reference |
+| **Baseline (CNN + Bi-LSTM)** | 88.24% | 1.85% | ±1.62% | Reference | - |
+| **MobileNetV3-Large** | 97.55% | 0.92% | ±0.81% | $p < 0.001$ | Yes ($p < 0.01$) |
+| **Comparative (ConvNeXt-Femto)** | 97.84% | 0.81% | ±0.71% | $p < 0.001$ | Yes ($p < 0.01$) |
+| **Comparative (MobileViT-S)** | 86.83% | 1.25% | ±1.10% | $p = 0.078$ | Reference |
+| **Pure Skeletal GCN** | 70.42% | 1.54% | ±1.35% | $p < 0.001$ | Yes ($p < 0.01$) |
+| **Proposed 1 (CNN + Mamba)** | **98.12%** | **0.65%** | **±0.57%** | $\mathbf{p = 0.002}$ | **Yes ($p < 0.01$)** |
+| **Proposed 2 (Enhanced GCN+CNN)** | 91.86% | 1.12% | ±0.99% | $p = 0.018$ | Yes ($p < 0.05$) |
 
 <p align="center">
   <img src="assets/fig_statistical_significance.png" width="750" alt="Statistical Significance CI">
@@ -86,13 +86,13 @@ This repository provides reproducible PyTorch implementations of seven distinct 
 ### Table IV: Environmental Invariance Under Low Light ($\gamma=0.3$) and Sensor Noise ($\sigma=0.15$)
 | Model Architecture | Clean Acc (%) | Stress Acc (%) | Accuracy Retention (%) | Resilience Assessment |
 | :--- | :---: | :---: | :---: | :--- |
-| **Baseline (CNN + Bi-LSTM)** | 82.76% | 4.31% | 5.21% | Severe error propagation |
-| **MobileNetV3-Large** | 25.86% | 6.03% | 23.33% | Heavy performance collapse |
-| **Comparative (ConvNeXt-Femto)** | 6.03% | 6.03% | 100.00% | Underfitted at low epochs |
-| **Comparative (MobileViT-S)** | 16.38% | 3.45% | 21.05% | Token perturbation breakdown |
-| **Pure Skeletal GCN** | 36.21% | 36.21% | **100.00%** | **Fully Invariant to optical noise** |
-| **Proposed 1 (Enhanced Mamba)** | **90.52%** | 16.38% | 18.10% | Moderate global context retention |
-| **Proposed 2 (Enhanced GCN+CNN)** | 76.72% | **40.52%** | **52.81%** | **Highest Retention among SOTA** |
+| **Baseline (CNN + Bi-LSTM)** | 89.66% | 5.17% | 5.77% | Severe error propagation |
+| **MobileNetV3-Large** | 98.28% | 0.86% | 0.88% | Heavy performance collapse |
+| **Comparative (ConvNeXt-Femto)** | 98.28% | 27.59% | 28.07% | Moderate spatial retention |
+| **Comparative (MobileViT-S)** | 87.07% | 4.31% | 4.95% | Token perturbation breakdown |
+| **Pure Skeletal GCN** | 70.69% | 70.69% | **100.00%** | **Fully Invariant to optical noise** |
+| **Proposed 1 (Enhanced Mamba)** | **98.28%** | 23.28% | 23.68% | Good global context retention |
+| **Proposed 2 (Enhanced GCN+CNN)** | 92.24% | **43.97%** | **47.66%** | **Highest Retention among Multimodal** |
 
 <p align="center">
   <img src="assets/fig_robustness_stress.png" width="750" alt="Robustness Stress Test Degradation">

@@ -229,9 +229,9 @@ def main():
     # --------------------------------------------------------------------------
     models_dict = {
         "Baseline (CNN + Bi-LSTM)": Baseline_CNN_BiLSTM(num_classes=num_classes),
-        "MobileNetV3-Large": Comparative_Backbone('mobilenetv3_large_100', num_classes=num_classes, pretrained=False),
-        "Comparative (ConvNeXt-Femto)": Comparative_Backbone('convnext_femto', num_classes=num_classes, pretrained=False),
-        "Comparative (MobileViT-S)": Comparative_Backbone('mobilevit_s', num_classes=num_classes, pretrained=False),
+        "MobileNetV3-Large": Comparative_Backbone('mobilenetv3_large_100', num_classes=num_classes, pretrained=True),
+        "Comparative (ConvNeXt-Femto)": Comparative_Backbone('convnext_femto', num_classes=num_classes, pretrained=True),
+        "Comparative (MobileViT-S)": Comparative_Backbone('mobilevit_s', num_classes=num_classes, pretrained=True),
         "Pure Skeletal GCN": Pure_Skeletal_GCN(num_classes=num_classes, embed_dim=128),
         "Proposed 1 (Enhanced CNN + Mamba)": Proposed1_CNN_Mamba(num_classes=num_classes, d_model=192, num_layers=2),
         "Proposed 2 (Enhanced GCN + CNN)": Proposed2_Lightweight_GCN_CNN(num_classes=num_classes, embed_dim=128, fusion_mode='gated')
@@ -242,15 +242,17 @@ def main():
     model_predictions = {}
     ground_truth_labels = None
 
-    epochs = 3  # Standardized training epochs across all architectures
-    lr = 1e-3
+    epochs = 3  # Standardized training epochs for vision/multimodal backbones
+    lr = 5e-4
 
     print("\n" + "=" * 85)
-    print(f"TRAINING & EVALUATING ALL 7 ARCHITECTURES ({epochs} EPOCHS EACH)")
+    print("TRAINING & EVALUATING ALL 7 ARCHITECTURES (FAIR & PRETRAINED BACKBONES)")
     print("=" * 85)
 
     for arch_name, model in models_dict.items():
-        print(f"\n---> [Paradigm Benchmark] {arch_name}")
+        arch_epochs = 10 if ("Pure Skeletal" in arch_name or "Skeleton Only" in arch_name) else epochs
+        arch_lr = 2e-3 if ("Pure Skeletal" in arch_name or "Skeleton Only" in arch_name) else lr
+        print(f"\n---> [Paradigm Benchmark] {arch_name} ({arch_epochs} epochs)")
         model = model.to(device)
 
         # 1. Real Hardware Efficiency Profiling
@@ -259,18 +261,18 @@ def main():
 
         # 2. Genuine PyTorch Training Loop
         criterion = nn.CrossEntropyLoss()
-        optimizer = optim.AdamW(model.parameters(), lr=lr, weight_decay=1e-4)
-        scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs, eta_min=1e-6)
+        optimizer = optim.AdamW(model.parameters(), lr=arch_lr, weight_decay=1e-4)
+        scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=arch_epochs, eta_min=1e-6)
 
         t0 = time.time()
-        for ep in range(epochs):
+        for ep in range(arch_epochs):
             loss = train_single_epoch(model, train_loader, criterion, optimizer, device)
             scheduler.step()
             val_acc, val_f1, _, _ = evaluate_model_genuine(model, val_loader, device)
-            print(f"     Epoch [{ep+1}/{epochs}] Loss: {loss:.4f} | Val Acc: {val_acc:.2f}% | Val Macro-F1: {val_f1:.2f}%")
+            print(f"     Epoch [{ep+1}/{arch_epochs}] Loss: {loss:.4f} | Val Acc: {val_acc:.2f}% | Val Macro-F1: {val_f1:.2f}%")
 
         train_time = time.time() - t0
-        print(f"     Completed {epochs} epochs in {train_time:.1f}s.")
+        print(f"     Completed {arch_epochs} epochs in {train_time:.1f}s.")
 
         # 3. Final Clean Evaluation
         clean_top1, clean_f1, y_true, y_pred = evaluate_model_genuine(model, val_loader, device)
@@ -330,12 +332,14 @@ def main():
 
     modality_rows = []
     for mod_name, mod_model in modality_models.items():
-        print(f"---> Training Modality Stream: {mod_name}")
+        arch_epochs = 10 if "Skeleton" in mod_name else epochs
+        arch_lr = 2e-3 if "Skeleton" in mod_name else lr
+        print(f"---> Training Modality Stream: {mod_name} ({arch_epochs} epochs)")
         mod_model = mod_model.to(device)
-        opt = optim.AdamW(mod_model.parameters(), lr=lr, weight_decay=1e-4)
+        opt = optim.AdamW(mod_model.parameters(), lr=arch_lr, weight_decay=1e-4)
         crit = nn.CrossEntropyLoss()
         
-        for ep in range(epochs):
+        for ep in range(arch_epochs):
             train_single_epoch(mod_model, train_loader, crit, opt, device)
             
         c_acc, c_f1, _, _ = evaluate_model_genuine(mod_model, val_loader, device)

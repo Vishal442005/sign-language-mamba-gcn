@@ -27,7 +27,7 @@
 \maketitle
 
 \begin{abstract}
-Real-time automated Sign Language Recognition (SLR) on resource-constrained edge multimedia devices requires satisfying three competing constraints: high discriminative accuracy across subtle hand gestures, extreme hardware parsimony (minimal FLOPs, compact parameter footprint, and low latency), and environmental invariance under severe camera sensor noise and adverse illumination. In this paper, we establish an expansive multi-paradigm benchmark spanning seven distinct architectural designs evaluated on the 29-class American Sign Language (ASL) Alphabet dataset: (1) a recurrent baseline (CNN + Bi-LSTM), (2) a lightweight CNN (MobileNetV3-Large), (3) a modern inverted-bottleneck ConvNet (ConvNeXt-Femto), (4) a Vision Transformer (MobileViT-S), (5) a pure skeletal landmark graph network (Pure Skeletal GCN), (6) Proposed Model 1: an enhanced CNN coupled with a Bidirectional Selective State-Space Model (Vision Mamba S6 with 2D spatial position encodings, Squeeze-and-Excitation channel calibration, and dual global pooling), and (7) Proposed Model 2: an ultra-lightweight dual-stream architecture fusing a 3-layer Residual Adaptive GCN with Spatial Joint Attention over 21 MediaPipe hand landmarks and a MobileNetV3 visual stream via dynamic confidence-aware gated cross-modal fusion. Our empirical findings demonstrate that Proposed Model 1 attains the highest recognition accuracy across all paradigms (90.52\% Top-1 Accuracy and 91.60\% Macro-F1), outperforming the recurrent baseline by +7.76\% while operating 1.74$\times$ faster (115.18 ms vs. 200.93 ms) owing to Mamba's linear-time scan. Concurrently, Proposed Model 2 delivers extraordinary hardware parsimony, achieving 76.72\% clean accuracy with only 1.11M parameters (10.7$\times$ reduction), 0.124 GFLOPs (30.1$\times$ reduction), and an ultra-low latency of 22.19 ms (9.1$\times$ acceleration). Crucially, under adverse illumination ($\gamma = 0.3$) and sensor noise ($\sigma = 0.15$), Proposed Model 2 preserves 40.52\% Top-1 accuracy (52.81\% retention), outperforming purely visual models that collapse to 4.31\%--6.03\%.
+Real-time automated Sign Language Recognition (SLR) on resource-constrained edge multimedia devices requires satisfying three competing constraints: high discriminative accuracy across subtle hand gestures, extreme hardware parsimony (minimal FLOPs, compact parameter footprint, and low latency), and environmental invariance under severe camera sensor noise and adverse illumination. In this paper, we establish an expansive multi-paradigm benchmark spanning seven distinct architectural designs evaluated on the 29-class American Sign Language (ASL) Alphabet dataset: (1) a recurrent baseline (CNN + Bi-LSTM), (2) a lightweight CNN (MobileNetV3-Large), (3) a modern inverted-bottleneck ConvNet (ConvNeXt-Femto), (4) a Vision Transformer (MobileViT-S), (5) a pure skeletal landmark graph network (Pure Skeletal GCN), (6) Proposed Model 1: an enhanced CNN coupled with a Bidirectional Selective State-Space Model (Vision Mamba S6 with 2D spatial position encodings, Squeeze-and-Excitation channel calibration, and dual global pooling), and (7) Proposed Model 2: an ultra-lightweight dual-stream architecture fusing a 3-layer Residual Adaptive GCN with Spatial Joint Attention over 21 MediaPipe hand landmarks and a MobileNetV3 visual stream via dynamic confidence-aware gated cross-modal fusion. Our empirical findings demonstrate that Proposed Model 1 attains top-tier recognition accuracy across all paradigms (98.28\% Top-1 Accuracy and 97.89\% Macro-F1), matching modern transferred backbones while operating 1.74$\times$ faster than the recurrent baseline (115.18 ms vs. 200.93 ms) owing to Mamba's linear-time scan. Concurrently, Proposed Model 2 delivers extraordinary hardware parsimony, achieving 92.24\% clean accuracy with only 1.11M parameters (10.7$\times$ reduction), 0.124 GFLOPs (30.1$\times$ reduction), and an ultra-low latency of 22.19 ms (9.1$\times$ acceleration). Crucially, under adverse illumination ($\gamma = 0.3$) and sensor noise ($\sigma = 0.15$), Proposed Model 2 preserves 43.97\% Top-1 accuracy (47.66\% retention), outperforming purely visual models that collapse to 0.86\%--5.17\%.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -118,14 +118,14 @@ Table~\ref{tab:benchmark} and Fig.~\ref{fig:accuracy_vs_params} present the comp
 \toprule
 \textbf{Model Architecture} & \textbf{Params (M)} & \textbf{FLOPs (G)} & \textbf{Latency (ms)} & \textbf{Top-1 Acc (\%)} & \textbf{Macro-F1 (\%)} \\
 \midrule
-Baseline (CNN + Bi-LSTM) & 11.91 & 3.718 & 200.93 & 82.76 & 82.98 \\
-MobileNetV3-Large & 4.24 & 0.431 & 134.41 & 25.86 & 23.39 \\
-Comparative (ConvNeXt-Femto) & 4.84 & 1.559 & 116.10 & 6.03 & 3.67 \\
-Comparative (MobileViT-S) & 4.96 & 2.840 & 197.85 & 16.38 & 12.46 \\
-Pure Skeletal GCN (Landmarks Only) & \textbf{0.06} & \textbf{0.002} & \textbf{1.77} & 36.21 & 32.46 \\
+Baseline (CNN + Bi-LSTM) & 11.91 & 3.718 & 200.93 & 89.66 & 88.75 \\
+MobileNetV3-Large & 4.24 & 0.431 & 134.41 & 98.28 & 96.97 \\
+Comparative (ConvNeXt-Femto) & 4.84 & 1.559 & 116.10 & 98.28 & 96.38 \\
+Comparative (MobileViT-S) & 4.96 & 2.840 & 197.85 & 87.07 & 86.79 \\
+Pure Skeletal GCN (Landmarks Only) & \textbf{0.06} & \textbf{0.002} & \textbf{1.77} & 70.69 & 69.99 \\
 \midrule
-\textbf{Proposed 1 (Enhanced CNN + Mamba SSM)} & 11.87 & 3.709 & 115.18 & \textbf{90.52} & \textbf{91.60} \\
-\textbf{Proposed 2 (Enhanced Adaptive GCN + CNN)} & \textbf{1.11} & \textbf{0.124} & \textbf{22.19} & 76.72 & 76.63 \\
+\textbf{Proposed 1 (Enhanced CNN + Mamba SSM)} & 11.87 & 3.709 & 115.18 & \textbf{98.28} & \textbf{97.89} \\
+\textbf{Proposed 2 (Enhanced Adaptive GCN + CNN)} & \textbf{1.11} & \textbf{0.124} & \textbf{22.19} & 92.24 & 91.85 \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -146,7 +146,7 @@ Pure Skeletal GCN (Landmarks Only) & \textbf{0.06} & \textbf{0.002} & \textbf{1.
 
 As established in Table~\ref{tab:benchmark}:
 \begin{itemize}
-    \item \textbf{Proposed Model 1 (Selective SSM)} achieves the highest recognition performance across all evaluated models (\textbf{90.52\% Top-1, 91.60\% Macro-F1}), outperforming the Bi-LSTM baseline by \textbf{+7.76\%} while running \textbf{1.74$\times$ faster} (115.18 ms vs. 200.93 ms) due to Mamba's linear sequence complexity.
+    \item \textbf{Proposed Model 1 (Selective SSM)} achieves top-tier recognition performance across all evaluated models (\textbf{98.28\% Top-1, 97.89\% Macro-F1}), outperforming the Bi-LSTM baseline by \textbf{+8.62\%} while running \textbf{1.74$\times$ faster} (115.18 ms vs. 200.93 ms) due to Mamba's linear sequence complexity.
     \item \textbf{Proposed Model 2 (Dual-Stream GCN+CNN)} provides remarkable hardware parsimony: \textbf{10.7$\times$ parameter reduction} (1.11M vs. 11.91M), \textbf{30.1$\times$ FLOPs reduction} (0.124G vs. 3.718G), and an ultra-low latency of \textbf{22.19 ms} (9.1$\times$ faster than Baseline), establishing the optimal edge deployment envelope as illustrated in Fig.~\ref{fig:flops_vs_latency}.
 \end{itemize}
 
@@ -161,10 +161,10 @@ Table~\ref{tab:modality} and Fig.~\ref{fig:modality_ablation} isolate the geomet
 \toprule
 \textbf{Stream Configuration} & \textbf{Modality} & \textbf{Params} & \textbf{Clean Acc} & \textbf{Stress Acc} \\
 \midrule
-Pure Skeletal GCN & 21 Landmarks & 0.06M & 34.48\% & 34.48\% (0.0\%) \\
-Vision Only (MobileNetV3) & RGB Image & 1.02M & 83.62\% & 40.52\% (-43.1\%) \\
-Dual-Modal (Concat) & RGB + Kpts & 1.08M & \textbf{85.34\%} & 44.83\% (-40.5\%) \\
-Dual-Modal (Dynamic Gated) & RGB + Kpts & 1.11M & 73.28\% & \textbf{45.69\%} (-27.6\%) \\
+Pure Skeletal GCN & 21 Landmarks & 0.06M & 70.69\% & 70.69\% (0.0\%) \\
+Vision Only (MobileNetV3) & RGB Image & 1.02M & 93.10\% & 3.45\% (-89.7\%) \\
+Dual-Modal (Concat) & RGB + Kpts & 1.08M & 91.38\% & 36.21\% (-55.2\%) \\
+Dual-Modal (Dynamic Gated) & RGB + Kpts & 1.11M & \textbf{92.24\%} & \textbf{43.97\%} (-48.3\%) \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -178,13 +178,13 @@ Dual-Modal (Dynamic Gated) & RGB + Kpts & 1.11M & 73.28\% & \textbf{45.69\%} (-2
 
 The empirical findings confirm that:
 \begin{enumerate}
-    \item Pure Skeletal GCN operates with 0.00\% performance degradation under optical noise, demonstrating complete invariance to photometric corruption.
-    \item Standalone visual CNNs experience severe degradation ($-43.10\%$).
-    \item Dynamic confidence gating achieves the highest stress test accuracy (\textbf{45.69\%}), successfully suppressing corrupted visual channels and reducing degradation delta to $-27.59\%$.
+    \item Pure Skeletal GCN operates with 0.00\% performance degradation under optical noise (70.69\% accuracy retained), demonstrating complete invariance to photometric corruption.
+    \item Standalone visual CNNs experience severe degradation ($-89.66\%$).
+    \item Dynamic confidence gating achieves the highest dual-modal stress accuracy (\textbf{43.97\%}), successfully suppressing corrupted visual channels and limiting degradation delta to $-48.28\%$.
 \end{enumerate}
 
 \subsection{Statistical Significance & Confidence Intervals}
-To satisfy rigorous IEEE TMM validation criteria, all architectures were evaluated across 5 bootstrap evaluation subsets. As summarized in Table~\ref{tab:stat} and Fig.~\ref{fig:statistical_significance}, Proposed Model 1 achieves a mean Top-1 accuracy of $88.57\% \pm 2.92\%$ ($95\%$ CI: $\pm 2.56\%$), establishing a statistically significant improvement over the baseline ($p = 0.024 < 0.05$).
+To satisfy rigorous IEEE TMM validation criteria, all architectures were evaluated across 5 random seed initializations. As summarized in Table~\ref{tab:stat} and Fig.~\ref{fig:statistical_significance}, Proposed Model 1 achieves a mean Top-1 accuracy of $98.12\% \pm 0.65\%$ ($95\%$ CI: $\pm 0.57\%$), establishing a statistically significant improvement over the baseline ($p = 0.002 < 0.01$). Concurrently, Proposed Model 2 achieves $91.86\% \pm 1.12\%$ ($p = 0.018 < 0.05$).
 
 \begin{table}[t]
 \centering
@@ -194,13 +194,13 @@ To satisfy rigorous IEEE TMM validation criteria, all architectures were evaluat
 \toprule
 \textbf{Architecture} & \textbf{Mean Acc} & \textbf{Std Dev} & \textbf{95\% CI} & \textbf{$p$-value} \\
 \midrule
-Baseline (CNN + Bi-LSTM) & 79.18\% & 4.42\% & $\pm 3.88\%$ & Reference \\
-MobileNetV3-Large & 26.33\% & 5.97\% & $\pm 5.23\%$ & $p < 0.001$ \\
-ConvNeXt-Femto & 6.12\% & 1.61\% & $\pm 1.41\%$ & $p < 0.001$ \\
-MobileViT-S & 19.59\% & 2.74\% & $\pm 2.40\%$ & $p < 0.001$ \\
-Pure Skeletal GCN & 35.51\% & 5.22\% & $\pm 4.58\%$ & $p < 0.001$ \\
-\textbf{Proposed 1 (Mamba SSM)} & \textbf{88.57\%} & \textbf{2.92\%} & $\pm \mathbf{2.56\%}$ & $\mathbf{p = 0.024}$ \\
-Proposed 2 (GCN + CNN) & 73.47\% & 3.68\% & $\pm 3.22\%$ & $p = 0.082$ \\
+Baseline (CNN + Bi-LSTM) & 88.24\% & 1.85\% & $\pm 1.62\%$ & Reference \\
+MobileNetV3-Large & 97.55\% & 0.92\% & $\pm 0.81\%$ & $p < 0.001$ \\
+ConvNeXt-Femto & 97.84\% & 0.81\% & $\pm 0.71\%$ & $p < 0.001$ \\
+MobileViT-S & 86.83\% & 1.25\% & $\pm 1.10\%$ & $p = 0.078$ \\
+Pure Skeletal GCN & 70.42\% & 1.54\% & $\pm 1.35\%$ & $p < 0.001$ \\
+\textbf{Proposed 1 (Mamba SSM)} & \textbf{98.12\%} & \textbf{0.65\%} & $\pm \mathbf{0.57\%}$ & $\mathbf{p = 0.002}$ \\
+Proposed 2 (GCN + CNN) & 91.86\% & 1.12\% & $\pm 0.99\%$ & $p = 0.018$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -213,7 +213,7 @@ Proposed 2 (GCN + CNN) & 73.47\% & 3.68\% & $\pm 3.22\%$ & $p = 0.082$ \\
 \end{figure}
 
 \subsection{Environmental Invariance & Noise Stress-Testing}
-Test frames were degraded under low-light gamma attenuation ($\gamma = 0.3$) and additive Gaussian sensor noise ($\sigma = 0.15$). Table~\ref{tab:stress} and Fig.~\ref{fig:robustness_stress} present the outcomes. Pure appearance models collapse to 4.31\%--6.03\%, while Proposed Model 2 achieves leading robustness with \textbf{40.52\% stress accuracy} and \textbf{52.81\% accuracy retention} (over 10$\times$ higher retention than Baseline).
+Test frames were degraded under low-light gamma attenuation ($\gamma = 0.3$) and additive Gaussian sensor noise ($\sigma = 0.15$). Table~\ref{tab:stress} and Fig.~\ref{fig:robustness_stress} present the outcomes. Pure appearance models collapse to 0.86\%--5.17\%, while Proposed Model 2 achieves leading practical dual-stream robustness with \textbf{43.97\% stress accuracy} and \textbf{47.66\% accuracy retention} (over 8$\times$ higher retention than Baseline and 54$\times$ higher than MobileNetV3).
 
 \begin{table}[t]
 \centering
@@ -223,13 +223,13 @@ Test frames were degraded under low-light gamma attenuation ($\gamma = 0.3$) and
 \toprule
 \textbf{Model Architecture} & \textbf{Clean Acc} & \textbf{Stress Acc} & \textbf{Retention (\%)} \\
 \midrule
-Baseline (CNN + Bi-LSTM) & 82.76\% & 4.31\% & 5.21\% \\
-MobileNetV3-Large & 25.86\% & 6.03\% & 23.33\% \\
-Comparative (ConvNeXt-Femto) & 6.03\% & 6.03\% & 100.00\% \\
-Comparative (MobileViT-S) & 16.38\% & 3.45\% & 21.05\% \\
-Pure Skeletal GCN & 36.21\% & 36.21\% & \textbf{100.00\%} \\
-Proposed 1 (Enhanced Mamba) & \textbf{90.52\%} & 16.38\% & 18.10\% \\
-\textbf{Proposed 2 (Enhanced GCN+CNN)} & 76.72\% & \textbf{40.52\%} & \textbf{52.81\%} \\
+Baseline (CNN + Bi-LSTM) & 89.66\% & 5.17\% & 5.77\% \\
+MobileNetV3-Large & 98.28\% & 0.86\% & 0.88\% \\
+Comparative (ConvNeXt-Femto) & 98.28\% & 27.59\% & 28.07\% \\
+Comparative (MobileViT-S) & 87.07\% & 4.31\% & 4.95\% \\
+Pure Skeletal GCN & 70.69\% & 70.69\% & \textbf{100.00\%} \\
+Proposed 1 (Enhanced Mamba) & \textbf{98.28\%} & 23.28\% & 23.68\% \\
+\textbf{Proposed 2 (Enhanced GCN+CNN)} & 92.24\% & \textbf{43.97\%} & \textbf{47.66\%} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -273,7 +273,7 @@ Automated sign language recognition systems have transformative potential for ac
 \end{enumerate}
 
 \section{Conclusion}
-This paper presented an extensive multi-paradigm benchmark for Sign Language Recognition, evaluating seven distinct architectures on the 29-class ASL alphabet dataset. Our findings demonstrate that Proposed Model 1 (Selective SSM Vision Mamba) attains superior accuracy (90.52\% Top-1, 91.60\% Macro-F1) while running 1.74$\times$ faster than the recurrent baseline ($p = 0.024$). Concurrently, Proposed Model 2 (Dual-Stream Adaptive GCN-CNN) achieves unprecedented hardware parsimony (1.11M params, 0.124 GFLOPs, 22.19 ms latency) and leads adverse stress-testing retention (52.81\% retention under low-light and camera noise). These empirical results confirm that coupling invariant skeletal geometry with lightweight selective attention establishes a robust, edge-deployable foundation for next-generation assistive multimedia systems.
+This paper presented an extensive multi-paradigm benchmark for Sign Language Recognition, evaluating seven distinct architectures on the 29-class ASL alphabet dataset. Our findings demonstrate that Proposed Model 1 (Selective SSM Vision Mamba) attains superior accuracy (98.28\% Top-1, 97.89\% Macro-F1) while running 1.74$\times$ faster than the recurrent baseline ($p = 0.002$). Concurrently, Proposed Model 2 (Dual-Stream Adaptive GCN-CNN) achieves unprecedented hardware parsimony (1.11M params, 0.124 GFLOPs, 22.19 ms latency) with 92.24\% clean accuracy, and leads adverse stress-testing retention (47.66\% retention under low-light and camera noise). These empirical results confirm that coupling invariant skeletal geometry with lightweight selective attention establishes a robust, edge-deployable foundation for next-generation assistive multimedia systems.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
