@@ -54,7 +54,7 @@ To overcome these barriers, recent advances in multimedia research have investig
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.96\linewidth]{figures/fig_architecture_pipeline.png}
+\includegraphics[width=0.96\linewidth]{figures/fig_architecture_pipeline.pdf}
 \caption{End-to-end schematic pipeline of the proposed synergistic dual-stream adaptive GCN-CNN framework with dynamic confidence-aware cross-modal gating for real-time robust sign language recognition on resource-constrained edge platforms.}
 \label{fig:architecture_pipeline}
 \end{figure*}
@@ -132,14 +132,14 @@ Pure Skeletal GCN (Landmarks Only) & \textbf{0.06} & \textbf{0.002} & \textbf{1.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/fig_accuracy_vs_params.png}
+\includegraphics[width=0.98\linewidth]{figures/fig_accuracy_vs_params.pdf}
 \caption{Recognition accuracy vs. parameter footprint Pareto trade-off (bubble area is proportional to inference latency in ms).}
 \label{fig:accuracy_vs_params}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/fig_flops_vs_latency.png}
+\includegraphics[width=0.98\linewidth]{figures/fig_flops_vs_latency.pdf}
 \caption{Computational complexity landscape: Theoretical FLOPs (G) vs. measured inference latency (ms), highlighting the target mobile edge budget zone.}
 \label{fig:flops_vs_latency}
 \end{figure}
@@ -171,7 +171,7 @@ Dual-Modal (Dynamic Gated) & RGB + Kpts & 1.11M & \textbf{92.24\%} & \textbf{43.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/fig_modality_ablation.png}
+\includegraphics[width=0.98\linewidth]{figures/fig_modality_ablation.pdf}
 \caption{Modality stream decomposition: Clean vs. adverse stress test accuracy across skeletal, visual, and dual-modal streams.}
 \label{fig:modality_ablation}
 \end{figure}
@@ -207,7 +207,7 @@ Proposed 2 (GCN + CNN) & 91.86\% & 1.12\% & $\pm 0.99\%$ & $p = 0.018$ \\
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/fig_statistical_significance.png}
+\includegraphics[width=0.98\linewidth]{figures/fig_statistical_significance.pdf}
 \caption{Empirical accuracy distributions with 95\% Confidence Intervals across 5 evaluation seeds.}
 \label{fig:statistical_significance}
 \end{figure}
@@ -236,14 +236,14 @@ Proposed 1 (Enhanced Mamba) & \textbf{98.28\%} & 23.28\% & 23.68\% \\
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/fig_robustness_stress.png}
+\includegraphics[width=0.98\linewidth]{figures/fig_robustness_stress.pdf}
 \caption{Clean recognition accuracy vs. adverse noise/illumination degradation across all 7 evaluated architectures.}
 \label{fig:robustness_stress}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/fig_dynamic_gating_weights.png}
+\includegraphics[width=0.98\linewidth]{figures/fig_dynamic_gating_weights.pdf}
 \caption{Dynamic cross-modal gating response under progressive sensor noise sweep ($\sigma \in [0.0, 0.30]$), showing autonomous adaptive modulation of skeletal and visual channel weights.}
 \label{fig:dynamic_gating}
 \end{figure}
@@ -253,14 +253,14 @@ To investigate how multimodal fusion separates fine-grained hand configurations 
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/fig_tsne_latent_space.png}
+\includegraphics[width=0.98\linewidth]{figures/fig_tsne_latent_space.pdf}
 \caption{Two-dimensional $t$-SNE manifold projection of the fused multimodal latent space (128-D) across the 29 ASL alphabet classes.}
 \label{fig:tsne_latent_space}
 \end{figure}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.98\linewidth]{figures/fig_confusion_matrix.png}
+\includegraphics[width=0.98\linewidth]{figures/fig_confusion_matrix.pdf}
 \caption{Normalized confusion matrix across all 29 ASL alphabet classes for Proposed Model 2 (Adaptive GCN + MobileNetV3).}
 \label{fig:confusion_matrix}
 \end{figure}
