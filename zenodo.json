@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "title": "Empirical Benchmarking of Synergistic Dual-Stream GCN-CNN Architectures for Sign Language Recognition on Edge Devices",
+    "upload_type": "software",
+    "description": "Comprehensive source code, empirical benchmarking datasets, trained state-space and graph convolutional models, ablation sweeps, and IEEE Transactions manuscript for real-time edge sign language recognition under severe sensor noise.",
+    "creators": [
+      {
+        "name": "Chandel, Vishal",
+        "affiliation": "Department of Computer Science & Engineering",
+        "email": "chandelvishal445@gmail.com"
+      }
+    ],
+    "access_right": "open",
+    "license": "mit",
+    "keywords": [
+      "Sign Language Recognition",
+      "Graph Convolutional Networks",
+      "Selective State Spaces",
+      "Mamba",
+      "Edge Multimodal Inference",
+      "Cross-Modal Dynamic Gating",
+      "Sensor Noise Robustness",
+      "IEEE Transactions on Multimedia"
+    ],
+    "version": "1.0.0"
+  }
+}

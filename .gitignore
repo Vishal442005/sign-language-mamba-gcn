@@ -1,0 +1,49 @@
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments
+env/
+venv/
+.venv/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# PyTorch checkpoints and models
+*.pth
+*.pt
+*.bin
+*.onnx
+checkpoints/
+
+# Datasets and large archives (Do NOT push to GitHub)
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+dataset_extracted/
+asl_alphabet_train/
+asl_alphabet_test/
+data/
+
+# MediaPipe cached landmark arrays (Re-generated via preprocess_keypoints.py)
+*.npy
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs and outputs
+*.log
+tmp/
+scratch/

@@ -1,0 +1,4 @@
+Configuration,Top-1 Acc (%),Macro-F1 (%)
+Config A: Fixed Adjacency (alpha=0),71.37931034482759,67.83195007154235
+Config B: Adaptive Adjacency (A + alpha*A_ada),72.75862068965517,70.03484477015354
+Config C: Simple Concat Fusion,98.27586206896551,98.13051083753233

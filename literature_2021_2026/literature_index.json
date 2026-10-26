@@ -1,0 +1,123 @@
+[
+  {
+    "id": "2104.02330",
+    "year": 2021,
+    "filename": "2021_Visual_Alignment_Constraint_CSLR.pdf",
+    "title": "Visual Alignment Constraint for Continuous Sign Language Recognition",
+    "authors": "Yuecong Min, Aiming Hao, et al.",
+    "venue": "IEEE ICCV / arXiv",
+    "scope": "Alignment constraint and visual auxiliary loss in SLR",
+    "local_path": "literature_2021_2026\\2021_Visual_Alignment_Constraint_CSLR.pdf",
+    "file_size_kb": 2600
+  },
+  {
+    "id": "2211.17081",
+    "year": 2022,
+    "filename": "2022_Self_Emphasizing_Network_CSLR.pdf",
+    "title": "Self-Emphasizing Network for Continuous Sign Language Recognition",
+    "authors": "Lianyu Hu, Liqing Gao, Zekang Liu, Wei Feng",
+    "venue": "arXiv / CVPR",
+    "scope": "Lightweight spatial emphasis on hands/faces without dense pose heatmaps",
+    "local_path": "literature_2021_2026\\2022_Self_Emphasizing_Network_CSLR.pdf",
+    "file_size_kb": 1225
+  },
+  {
+    "id": "2211.00448",
+    "year": 2022,
+    "filename": "2022_Background_Robustness_Benchmarking_CSLR.pdf",
+    "title": "Signing Outside the Studio: Benchmarking Background Robustness for Continuous Sign Language Recognition",
+    "authors": "Youngjoon Jang, et al.",
+    "venue": "arXiv / ECCV",
+    "scope": "Environmental robustness and background invariance in SLR",
+    "local_path": "literature_2021_2026\\2022_Background_Robustness_Benchmarking_CSLR.pdf",
+    "file_size_kb": 3121
+  },
+  {
+    "id": "2305.04868",
+    "year": 2023,
+    "filename": "2023_SignBERT_Hand_Model_Aware_SLR.pdf",
+    "title": "SignBERT+: Hand-model-aware Self-supervised Pre-training for Sign Language Understanding",
+    "authors": "Hezhen Hu, Weichao Zhao, Wengang Zhou, Houqiang Li",
+    "venue": "IEEE TPAMI / arXiv",
+    "scope": "Self-supervised 3D hand mesh and keypoint pre-training for SLR",
+    "local_path": "literature_2021_2026\\2023_SignBERT_Hand_Model_Aware_SLR.pdf",
+    "file_size_kb": 5884
+  },
+  {
+    "id": "2312.00752",
+    "year": 2023,
+    "filename": "2023_Mamba_Linear_Time_Selective_SSM.pdf",
+    "title": "Mamba: Linear-Time Sequence Modeling with Selective State Spaces",
+    "authors": "Albert Gu, Tri Dao",
+    "venue": "arXiv preprint",
+    "scope": "Foundational Selective State Space (S6) formulation with input-dependent hardware-aware scan",
+    "local_path": "literature_2021_2026\\2023_Mamba_Linear_Time_Selective_SSM.pdf",
+    "file_size_kb": 1141
+  },
+  {
+    "id": "2401.09417",
+    "year": 2024,
+    "filename": "2024_Vision_Mamba_Bidirectional_SSM.pdf",
+    "title": "Vision Mamba: Efficient Visual Representation Learning with Bidirectional State Space Model",
+    "authors": "Lianghui Zhu, Bencheng Liao, Qian Zhang, et al.",
+    "venue": "ICML / arXiv",
+    "scope": "Bidirectional selective state space modeling for 2D visual feature sequences",
+    "local_path": "literature_2021_2026\\2024_Vision_Mamba_Bidirectional_SSM.pdf",
+    "file_size_kb": 1092
+  },
+  {
+    "id": "2403.12519",
+    "year": 2024,
+    "filename": "2024_Dynamic_Spatial_Temporal_Aggregation_Skeleton_SLR.pdf",
+    "title": "Dynamic Spatial-Temporal Aggregation for Skeleton-Aware Sign Language Recognition",
+    "authors": "Hezhen Hu, et al.",
+    "venue": "arXiv preprint",
+    "scope": "Adaptive input-sensitive graph convolutions on hand skeletons",
+    "local_path": "literature_2021_2026\\2024_Dynamic_Spatial_Temporal_Aggregation_Skeleton_SLR.pdf",
+    "file_size_kb": 1154
+  },
+  {
+    "id": "2404.11111",
+    "year": 2024,
+    "filename": "2024_CorrNet_Plus_Spatial_Temporal_Correlation_SLR.pdf",
+    "title": "CorrNet+: Sign Language Recognition and Translation via Spatial-Temporal Correlation",
+    "authors": "Lianyu Hu, Wei Feng, Liqing Gao, et al.",
+    "venue": "IEEE T-PAMI / arXiv",
+    "scope": "Correlation modeling across spatial trajectories and temporal tokens",
+    "local_path": "literature_2021_2026\\2024_CorrNet_Plus_Spatial_Temporal_Correlation_SLR.pdf",
+    "file_size_kb": 2965
+  },
+  {
+    "id": "2408.07244",
+    "year": 2024,
+    "filename": "2024_Deep_Learning_Low_Cost_Handcrafted_SLR.pdf",
+    "title": "Sign language recognition based on deep learning and low-cost handcrafted descriptors",
+    "authors": "Alvaro Leandro Cavalcante Carneiro, et al.",
+    "venue": "arXiv preprint",
+    "scope": "Low-cost embedded computation for sign language classification",
+    "local_path": "literature_2021_2026\\2024_Deep_Learning_Low_Cost_Handcrafted_SLR.pdf",
+    "file_size_kb": 9142
+  },
+  {
+    "id": "2509.08661",
+    "year": 2025,
+    "filename": "2025_Dual_Stream_Dynamic_GCN_SLR.pdf",
+    "title": "Skeleton-based sign language recognition using a dual-stream spatio-temporal dynamic graph convolutional network",
+    "authors": "Research Consortium",
+    "venue": "arXiv / Under review",
+    "scope": "Dual-stream topology-aware graph convolutions for wrist/joint trajectories",
+    "local_path": "literature_2021_2026\\2025_Dual_Stream_Dynamic_GCN_SLR.pdf",
+    "file_size_kb": 1585
+  },
+  {
+    "id": "2512.10562",
+    "year": 2025,
+    "filename": "2025_Data_Efficient_American_Sign_Language_GCN.pdf",
+    "title": "Data-Efficient American Sign Language Recognition via Few-Shot Prototypical Networks",
+    "authors": "Research Consortium",
+    "venue": "arXiv preprint",
+    "scope": "ST-GCN on ASL landmarks for data-efficient edge recognition",
+    "local_path": "literature_2021_2026\\2025_Data_Efficient_American_Sign_Language_GCN.pdf",
+    "file_size_kb": 1758
+  }
+]
