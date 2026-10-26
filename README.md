@@ -159,7 +159,7 @@ repository/
 
 ### 1. Installation
 ```bash
-git clone https://github.com/chandelvishal/sign-language-mamba-gcn.git
+git clone https://github.com/Vishal442005/sign-language-mamba-gcn.git
 cd sign-language-mamba-gcn
 pip install -r requirements.txt
 ```
