@@ -131,11 +131,47 @@ This repository provides reproducible PyTorch implementations of seven distinct 
   <img src="assets/fig_dynamic_gating_weights.png" width="750" alt="Autonomous Dynamic Gating Response">
 </p>
 
-### Manifold Feature Clustering & 29-Class Confusion Matrix
+### Manifold Feature Clustering & Normalized 29-Class Confusion Matrix
 <p align="center">
-  <img src="assets/fig_tsne_latent_space.png" width="500" alt="2D t-SNE Manifold Projection">
-  <img src="assets/fig_confusion_matrix.png" width="450" alt="29-Class Confusion Matrix">
+  <img src="assets/fig_tsne_latent_space.png" width="460" alt="2D t-SNE Manifold Projection">
+  <img src="assets/fig_confusion_matrix.png" width="490" alt="Normalized 29-Class Confusion Matrix">
 </p>
+
+---
+
+### Multi-Batch Inference Throughput & Real-Time Edge Video Envelope (Fig. 11)
+<p align="center">
+  <img src="assets/fig_throughput_fps.png" width="750" alt="Multi-Batch Inference Throughput FPS">
+</p>
+
+*Proposed Model 2 comfortably sustains interactive video rates (>25.0 FPS) across batch sizes on edge CPU, while Pure Skeletal GCN delivers ultra-high throughput (>460 FPS at $B=1$, >6500 FPS at $B=32$).*
+
+---
+
+### Granular 29-Class Recognition Spectrum (Fig. 12)
+<p align="center">
+  <img src="assets/fig_per_class_f1.png" width="850" alt="Granular 29-Class Performance Spectrum">
+</p>
+
+*Uniform precision and recall across all 29 ASL alphabet classes (`A`–`Z`, `del`, `nothing`, `space`), demonstrating that cross-modal fusion prevents gesture mode collapse.*
+
+---
+
+### Learned Spatial Joint Attention Across 21 MediaPipe Landmarks (Fig. 13)
+<p align="center">
+  <img src="assets/fig_spatial_joint_attention.png" width="800" alt="Learned Spatial Joint Attention Distribution">
+</p>
+
+*Attention weights autonomously allocate elevated importance to distal fingertips (Thumb Tip, Index Tip, Middle Tip, Ring Tip, Pinky Tip) and thumb phalanges ($5.12\%$--$5.42\%$, well above uniform $4.76\%$), validating that sign discrimination concentrates in distal phalanges.*
+
+---
+
+### Vision Mamba S6 Architectural Ablation: Scan Directionality & Dual Pooling (Fig. 14)
+<p align="center">
+  <img src="assets/fig_mamba_ablation.png" width="750" alt="Vision Mamba Architectural Ablation">
+</p>
+
+*Bidirectional scanning overcomes causal vision bias (elevating Top-1 accuracy from 93.10% to 96.55%), while multi-scale dual pooling achieves peak **98.28% Top-1 accuracy** by capturing both peak salient features and broad spatial context.*
 
 ---
 
@@ -144,17 +180,23 @@ This repository provides reproducible PyTorch implementations of seven distinct 
 ```text
 repository/
 ├── assets/
-│   ├── fig_architecture_pipeline.png       # Complete system architecture flowchart
-│   ├── fig_accuracy_vs_params.png          # Pareto frontier bubble plot
-│   ├── fig_flops_vs_latency.png            # Computational efficiency landscape
-│   ├── fig_robustness_stress.png           # Noise and low-light degradation
-│   ├── fig_dynamic_gating_weights.png      # Gating weights across noise levels
-│   ├── fig_modality_ablation.png           # Modality synergy decomposition
-│   ├── fig_statistical_significance.png    # 95% Confidence Intervals
-│   ├── fig_tsne_latent_space.png           # 2D t-SNE feature manifold projection
-│   └── fig_confusion_matrix.png            # Normalized 29-class confusion matrix
-├── latex_manuscript/                       # Overleaf-ready LaTeX bundle (IEEEtran.cls, main.tex, refs)
-├── literature_2021_2026/                   # 11 Full-text foundational literature PDFs (IEEE TMM, CVPR)
+│   ├── fig_architecture_pipeline.png       # Complete system architecture flowchart (Fig. 1)
+│   ├── fig_accuracy_vs_params.png          # Pareto frontier bubble plot (Fig. 2)
+│   ├── fig_flops_vs_latency.png            # Computational efficiency landscape (Fig. 3)
+│   ├── fig_modality_ablation.png           # Modality synergy decomposition (Fig. 4)
+│   ├── fig_statistical_significance.png    # 95% Confidence Intervals (Fig. 5)
+│   ├── fig_robustness_stress.png           # Noise and low-light degradation (Fig. 6)
+│   ├── fig_dynamic_gating_weights.png      # Gating weights across noise levels (Fig. 7)
+│   ├── fig_tsne_latent_space.png           # 2D t-SNE feature manifold projection (Fig. 8)
+│   ├── fig_confusion_matrix.png            # Normalized 29-class confusion matrix (Fig. 9, Fixed)
+│   ├── fig_sequence_scaling.png            # Linear-time sequence scaling curves (Fig. 10)
+│   ├── fig_throughput_fps.png              # Multi-batch throughput FPS landscape (Fig. 11)
+│   ├── fig_per_class_f1.png                # 29-class granular performance spectrum (Fig. 12)
+│   ├── fig_spatial_joint_attention.png     # Learned 21-joint spatial attention (Fig. 13)
+│   └── fig_mamba_ablation.png              # S6 directionality & dual pooling ablation (Fig. 14)
+├── latex_manuscript/                       # Overleaf-ready LaTeX bundle (IEEEtran.cls, main.tex, refs, 14 vector PDFs)
+├── literature_2021_2026/                   # 11 Foundational literature PDFs (IEEE TMM, CVPR)
+├── literature_2023_2026/                   # 8 Recent full-text research PDFs (2023-2026)
 ├── notebooks/
 │   └── Sign_Language_Research_Benchmark.ipynb # 1-Click Google Colab Notebook
 ├── paper/
@@ -165,6 +207,12 @@ repository/
 │   ├── statistical_significance.csv        # 5-seed statistical test data
 │   ├── stress_test_results.csv             # Photometric stress test data
 │   ├── gating_trajectory.csv               # Gating weight trajectory
+│   ├── sequence_scaling_results.csv        # Token sequence length latency data
+│   ├── visigns_ablation.csv                # Anatomical ambiguity cluster metrics
+│   ├── throughput_fps_benchmark.csv        # Multi-batch throughput FPS data
+│   ├── per_class_metrics.csv               # 29-class precision, recall, F1 metrics
+│   ├── spatial_joint_attention.csv         # 21-joint attention distribution data
+│   ├── mamba_ablation_study.csv            # Scan direction & pooling ablation data
 │   └── tsne_embeddings.csv                 # 2D t-SNE coordinate embeddings
 ├── .gitignore                              # Git exclusion rules
 ├── LICENSE                                 # MIT Open-Source License

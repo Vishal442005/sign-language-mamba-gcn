@@ -1,0 +1,36 @@
+Architecture,Batch Size,Throughput (FPS),Latency per Sample (ms),Model Size (MB)
+Baseline (CNN + Bi-LSTM),1,6.35,157.53,45.43
+Baseline (CNN + Bi-LSTM),4,11.16,89.58,45.43
+Baseline (CNN + Bi-LSTM),8,9.01,110.98,45.43
+Baseline (CNN + Bi-LSTM),16,15.5,64.51,45.43
+Baseline (CNN + Bi-LSTM),32,17.96,55.69,45.43
+MobileNetV3-Large,1,23.53,42.5,16.17
+MobileNetV3-Large,4,33.0,30.3,16.17
+MobileNetV3-Large,8,38.22,26.16,16.17
+MobileNetV3-Large,16,32.97,30.33,16.17
+MobileNetV3-Large,32,38.18,26.19,16.17
+Comparative (ConvNeXt-Femto),1,18.8,53.19,18.48
+Comparative (ConvNeXt-Femto),4,12.03,83.15,18.48
+Comparative (ConvNeXt-Femto),8,17.26,57.94,18.48
+Comparative (ConvNeXt-Femto),16,20.84,47.99,18.48
+Comparative (ConvNeXt-Femto),32,29.73,33.64,18.48
+Comparative (MobileViT-S),1,6.26,159.84,18.91
+Comparative (MobileViT-S),4,5.97,167.64,18.91
+Comparative (MobileViT-S),8,5.35,186.77,18.91
+Comparative (MobileViT-S),16,3.41,293.28,18.91
+Comparative (MobileViT-S),32,4.69,213.27,18.91
+Pure Skeletal GCN,1,464.1,2.15,0.23
+Pure Skeletal GCN,4,938.7,1.07,0.23
+Pure Skeletal GCN,8,3751.18,0.27,0.23
+Pure Skeletal GCN,16,6380.88,0.16,0.23
+Pure Skeletal GCN,32,6567.12,0.15,0.23
+Proposed 1 (Enhanced Mamba),1,3.8,263.05,45.29
+Proposed 1 (Enhanced Mamba),4,3.62,276.53,45.29
+Proposed 1 (Enhanced Mamba),8,3.97,251.95,45.29
+Proposed 1 (Enhanced Mamba),16,3.47,288.57,45.29
+Proposed 1 (Enhanced Mamba),32,9.73,102.73,45.29
+Proposed 2 (Enhanced GCN+CNN),1,25.06,39.91,4.23
+Proposed 2 (Enhanced GCN+CNN),4,51.73,19.33,4.23
+Proposed 2 (Enhanced GCN+CNN),8,50.94,19.63,4.23
+Proposed 2 (Enhanced GCN+CNN),16,54.93,18.21,4.23
+Proposed 2 (Enhanced GCN+CNN),32,25.49,39.22,4.23

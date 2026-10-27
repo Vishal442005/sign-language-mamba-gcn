@@ -1,0 +1,6 @@
+Configuration,Scan Directionality,Pooling Strategy,Top-1 Acc (%),Macro-F1 (%),Latency (ms)
+Unidirectional Forward Scan (Avg Pool),forward_only,avg,93.1,92.45,36.72
+Unidirectional Backward Scan (Avg Pool),backward_only,avg,92.24,91.8,36.09
+Bidirectional Scan (Avg Pool Only),bidirectional,avg,96.55,95.9,143.07
+Bidirectional Scan (Max Pool Only),bidirectional,max,95.69,94.85,69.83
+Proposed 1: Bidirectional Scan + Multi-Scale Dual Pool,bidirectional,dual,98.28,97.89,72.78

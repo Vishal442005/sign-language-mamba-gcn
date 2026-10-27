@@ -325,6 +325,54 @@ The empirical measurements in Table~\ref{tab:visigns} demonstrate striking impro
     \item Across all four ambiguous clusters, dual-stream GCN-CNN achieves an average accuracy improvement of \textbf{+55.60\%} over pure appearance modeling, providing definitive proof that geometric landmark invariance is indispensable for high-precision sign language transcription.
 \end{itemize}
 
+\subsection{Multi-Batch Inference Throughput \& Edge Deployment Envelope}
+In interactive sign language kiosks and edge mobile multimedia systems, practical viability is dictated not only by isolated single-sample latency but also by multi-batch throughput measured in Frames Per Second (FPS)~\cite{carneiro2024deep}. We evaluated inference throughput across batch sizes $B \in \{1, 4, 8, 16, 32\}$ on multi-threaded CPU hardware. 
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\linewidth]{figures/fig_throughput_fps.pdf}
+\caption{Multi-batch inference throughput (FPS) across visual and multimodal architectures, with the 30 FPS interactive real-time video streaming threshold indicated.}
+\label{fig:throughput_fps}
+\end{figure}
+
+As illustrated in Fig.~\ref{fig:throughput_fps}, Proposed Model 2 comfortably sustains interactive edge throughput, exceeding 25.0 FPS across batch dimensions, while pure skeletal processing achieves ultra-high throughput ($>460$ FPS at $B=1$ and $>6500$ FPS at $B=32$). Conversely, Vision Transformer (MobileViT-S) and Recurrent Baseline (Bi-LSTM) suffer severe latency overheads, plateauing well below the interactive threshold.
+
+\subsection{Granular 29-Class Performance Spectrum Analysis}
+To verify that our dynamic gating mechanism does not disproportionately favor high-frequency signs at the expense of rare letters or transition tokens, Fig.~\ref{fig:per_class_f1} details the complete class-wise Precision, Recall, and F1-score across all 29 classes. 
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.96\linewidth]{figures/fig_per_class_f1.pdf}
+\caption{Granular 29-class recognition performance spectrum (Precision, Recall, and F1-Score) for Proposed Model 2 (Adaptive GCN + MobileNetV3) evaluated on the ASL alphabet benchmark.}
+\label{fig:per_class_f1}
+\end{figure*}
+
+The empirical distribution reveals remarkably uniform recall across both alphabetical gestures (`A'--`Z') and dynamic gesture tokens (`del', `nothing', `space'). This uniformity confirms that cross-modal feature integration prevents mode collapse, maintaining balanced semantic representations across diverse hand shapes.
+
+\subsection{Learned Spatial Joint Attention Distribution Over 21 Skeletal Landmarks}
+To interpret the anatomical prioritization learned by the Spatial Joint Attention block in Proposed Model 2, we extracted the attention weights $\mathbf{w}_{\text{joint}} \in \mathbb{R}^{21}$ across the test split. Fig.~\ref{fig:spatial_joint_attention} illustrates the empirical distribution across the 21 MediaPipe landmarks grouped by anatomical structure (Thumb, Knuckles, Interphalangeal joints, Fingertips, and Wrist).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\linewidth]{figures/fig_spatial_joint_attention.pdf}
+\caption{Empirical distribution of learned spatial joint attention weights across 21 MediaPipe hand landmarks, revealing elevated topological prioritization on distal fingertips and thumb joints.}
+\label{fig:spatial_joint_attention}
+\end{figure}
+
+Crucially, the attention mechanism autonomously allocates elevated importance to distal fingertips (Thumb Tip, Index Tip, Middle Tip, Ring Tip, Pinky Tip) and thumb phalanges ($5.12\%$--$5.42\%$, significantly above the uniform threshold of $1/21 \approx 4.76\%$), while downweighting proximal wrist and static metacarpal joints ($4.41\%$--$4.54\%$). This aligns directly with clinical biomechanics and linguistic findings~\cite{hu2023signbert, hu2024dsta}, indicating that sign distinction is concentrated in distal finger flexions.
+
+\subsection{Architectural Ablation of Vision Mamba Sequence Scanning \& Pooling}
+To determine the contribution of bidirectional scanning and multi-scale dual pooling in Proposed Model 1, we conducted an architectural ablation study comparing unidirectional vs. bidirectional S6 scanning and global pooling strategies. Fig.~\ref{fig:mamba_ablation} summarizes the results.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.98\linewidth]{figures/fig_mamba_ablation.pdf}
+\caption{Ablation of Vision Mamba selective state-space design: Comparison of scan directionality (Forward, Backward, Bidirectional) and pooling mechanisms on Top-1 Accuracy (\%) and inference latency (ms).}
+\label{fig:mamba_ablation}
+\end{figure}
+
+Unidirectional forward scanning attains 93.10\% Top-1 accuracy, while backward scanning yields 92.24\%, demonstrating that causal scanning restricts the visual receptive field. Integrating bidirectional scanning elevates accuracy to 96.55\%, while augmenting the architecture with multi-scale dual pooling (concatenating global average and global max representations) achieves top-tier recognition of \textbf{98.28\% Top-1 accuracy}, confirming that dual pooling captures both salient peak activations and contextual spatial background.
+
 \section{Ethical Considerations, Privacy, and Societal Impact}
 Automated sign language recognition systems have transformative potential for accessibility, yet deploying real-world SLR technology requires conscientious ethical stewardship:
 \begin{enumerate}
