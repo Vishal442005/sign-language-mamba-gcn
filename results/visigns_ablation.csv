@@ -1,0 +1,5 @@
+Ambiguous Sign Cluster (VISigns),Classes Included,Samples Evaluated,Baseline Acc (%),Vision-Only Acc (%),Dual-Modal Gated Acc (%),Dual-Modal Gain vs Vision (%)
+"Fist / Thumb-Tuck (M, N, T, S, E, A)","M, N, T, S, E, A",34,94.12,14.71,58.82,44.12
+"Extended Fingers (U, V, W, K, R)","U, V, W, K, R",25,72.0,12.0,92.0,80.0
+"Index Pointing (D, G, P, Q, Z)","D, G, P, Q, Z",29,93.1,20.69,68.97,48.28
+"Flat Hand Open Palm (B, C, F, O)","B, C, F, O",28,89.29,39.29,89.29,50.0

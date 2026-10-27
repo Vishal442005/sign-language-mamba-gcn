@@ -98,7 +98,35 @@ This repository provides reproducible PyTorch implementations of seven distinct 
   <img src="assets/fig_robustness_stress.png" width="750" alt="Robustness Stress Test Degradation">
 </p>
 
-### Table V: Dynamic Cross-Modal Gating Weight Trajectory Under Noise Sweep
+### Table V: Sequence Length Latency Scaling ($\mathcal{O}(L)$ vs $\mathcal{O}(L^2)$)
+| Tokens ($L$) | Vision Mamba Latency (ms) | Bi-LSTM Latency (ms) | ViT Attention Latency (ms) | Mamba Speedup vs LSTM |
+| :---: | :---: | :---: | :---: | :---: |
+| **16** | 9.58 ms | 2.81 ms | 0.84 ms | 0.29× |
+| **32** | 16.92 ms | 3.98 ms | 1.06 ms | 0.24× |
+| **49 (Nominal)** | 25.82 ms | 4.87 ms | 1.17 ms | 0.19× |
+| **64** | 32.90 ms | 6.61 ms | 1.25 ms | 0.20× |
+| **96** | 46.05 ms | 9.24 ms | 1.86 ms | 0.20× |
+| **128** | 61.34 ms | 13.19 ms | 5.67 ms | 0.22× |
+| **196** | 115.98 ms | 16.10 ms | 6.25 ms | 0.14× |
+| **256** | 177.23 ms | 32.76 ms | 7.87 ms | 0.18× |
+
+<p align="center">
+  <img src="assets/fig_sequence_scaling.png" width="750" alt="Sequence Length Latency Scaling">
+</p>
+
+---
+
+### Table VI: Fine-Grained Anatomical Disambiguation on Confusing Signs (VISigns)
+| Ambiguous Sign Cluster | Classes Included | Samples | Vision-Only Acc (%) | Dual-Modal Gated Acc (%) | Dual-Modal Gain (%) |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| **Fist / Thumb-Tuck** | M, N, T, S, E, A | 34 | 14.71% | **58.82%** | **+44.11%** |
+| **Extended Phalanges** | U, V, W, K, R | 25 | 12.00% | **92.00%** | **+80.00%** |
+| **Index / Pointing** | D, G, P, Q, Z | 29 | 20.69% | **68.97%** | **+48.28%** |
+| **Open Flat Palm** | B, C, F, O | 28 | 39.29% | **89.29%** | **+50.00%** |
+
+---
+
+### Dynamic Cross-Modal Gating Weight Trajectory Under Noise Sweep
 <p align="center">
   <img src="assets/fig_dynamic_gating_weights.png" width="750" alt="Autonomous Dynamic Gating Response">
 </p>
